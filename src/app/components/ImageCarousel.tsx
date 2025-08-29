@@ -50,7 +50,7 @@ export default function ImageCarousel() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, maxIndex]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => prevIndex >= maxIndex ? 0 : prevIndex + 1);

@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #8EF27E; 
+  color: white; 
+}
+
+::-webkit-scrollbar {
+  width: 6px; 
+}
+
+::-webkit-scrollbar-track {
+  background: white; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8EF27E; 
+  border-radius: 10px; 
+}
+
+
+body {
+  font-family: "Manrope", serif;
+  background-color: #031A09;
+}
+
+.sans {
+  font-family: "DM Sans", serif;
+}
+
+.sora {
+  font-family: "Sora", serif;
+}
+
+.poppins {
+  font-family: "Poppins", serif;
+}
+
+.manrope {
+  font-family: "Manrope", serif;
+}
+
+.button {
+  box-shadow: 0px 0px 15.43px -2.55px #7BFFDEBB;
+}
+
+.title {
+  font-size: 2rem; 
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.6rem;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  .title {
+    font-size: 3.2rem;
+  }
+}
+
+button {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  animation: tremor 0.3s ease-in-out, scale-up 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+
+@keyframes tremor {
+  0% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(-5px);
+  }
+  50% {
+      transform: translateX(5px);
+  }
+  75% {
+      transform: translateX(-5px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+@keyframes scale-up {
+  0% {
+      transform: scale(1);
+  }
+  100% {
+      transform: scale(1.1);
+  }
+}

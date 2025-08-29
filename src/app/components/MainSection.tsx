@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import Image from 'next/image';
+import PauloImage from '@/images/paulo-autoridade-instagram-_1_2.png';
 
 export default function MainSection() {
     const handleClick = () => {
@@ -9,8 +10,6 @@ export default function MainSection() {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     };
-
-    const [muted, setMuted] = useState(true);
 
     return (
         <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:mt-[8vh] mt-[5vh] px-4 sm:px-8 lg:px-12 max-w-6xl mx-auto gap-6 lg:gap-12">
@@ -48,15 +47,12 @@ export default function MainSection() {
 
             <div className="flex justify-center w-full lg:w-[50%]">
                 <div className="relative w-[100%] sm:w-[90%] md:w-[80%] lg:w-[600px] xl:w-[700px] max-w-[900px] lg:mt-6 mt-16">
-                    <iframe className="w-full aspect-video" src={`https://www.youtube.com/embed/UWjg98ypwEA?autoplay=1&mute=${muted ? 1 : 0}&modestbranding=1&controls=0`} title="YouTube video player" style={{border: 0}} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-                    {muted && (
-                        <button
-                            onClick={() => setMuted(!muted)}
-                            className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-4 rounded-full text-lg font-bold'
-                        >
-                            Ligar Som
-                        </button>
-                    )}
+                    <Image
+                        src={PauloImage}
+                        alt="Paulo André Collet - Autoridade no Instagram"
+                        className="w-full h-auto rounded-lg shadow-xl"
+                        priority
+                    />
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 import { Target, Users, TrendingUp, Shield, Crown } from "lucide-react";
-import digitalAuthority from "@/assets/digital-authority.jpg";
+import logo from "@/assets/logo.jpeg";
 
 export const AspirationSection = () => {
   return (
-    <section className="py-20 bg-gradient-secondary relative overflow-hidden">
+    <section className="py-20 bg-primary-bg relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-primary/10"></div>
       
       <div className="relative z-10 container mx-auto px-6">
@@ -11,9 +11,6 @@ export const AspirationSection = () => {
           
           {/* Title */}
           <div className="text-center mb-16">
-            <div className="inline-block bg-neon/20 border border-neon/40 rounded-full px-6 py-2 mb-6">
-              <span className="text-neon font-bold">✨ ASPIRACIONAL</span>
-            </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               O que Você Realmente Deseja
             </h2>
@@ -28,8 +25,8 @@ export const AspirationSection = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-glow">
                 <img 
-                  src={digitalAuthority} 
-                  alt="Autoridade digital e crescimento" 
+                  src={logo} 
+                  alt="Logo do evento Posicionamento de Autoridade" 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-primary/20"></div>
@@ -42,7 +39,7 @@ export const AspirationSection = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4 p-4 bg-card/50 rounded-xl border border-border/50 backdrop-blur-sm">
-                  <Crown className="w-8 h-8 text-neon flex-shrink-0 mt-1" />
+                  <Crown className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="text-xl font-bold text-foreground mb-2">Referência no seu segmento</h4>
                     <p className="text-muted-foreground">
@@ -62,7 +59,7 @@ export const AspirationSection = () => {
                 </div>
                 
                 <div className="flex items-start gap-4 p-4 bg-card/50 rounded-xl border border-border/50 backdrop-blur-sm">
-                  <TrendingUp className="w-8 h-8 text-neon flex-shrink-0 mt-1" />
+                  <TrendingUp className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="text-xl font-bold text-foreground mb-2">Crescimento inteligente</h4>
                     <p className="text-muted-foreground">
@@ -82,7 +79,7 @@ export const AspirationSection = () => {
                 </div>
                 
                 <div className="flex items-start gap-4 p-4 bg-card/50 rounded-xl border border-border/50 backdrop-blur-sm">
-                  <Target className="w-8 h-8 text-neon flex-shrink-0 mt-1" />
+                  <Target className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="text-xl font-bold text-foreground mb-2">Posição sólida</h4>
                     <p className="text-muted-foreground">

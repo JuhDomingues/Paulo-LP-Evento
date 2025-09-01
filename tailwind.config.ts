@@ -62,14 +62,18 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				'gold': 'hsl(var(--accent-gold))',
-				'deep-blue': 'hsl(var(--accent-deep-blue))',
+				'primary-bg': 'hsl(var(--background-primary))',
+				'secondary-bg': 'hsl(var(--background-secondary))',
+				'highlight': 'hsl(var(--accent-highlight))',
+				'dark': 'hsl(var(--accent-dark))',
+				'cyan': 'hsl(195 100% 50%)',
 				'urban-gray': 'hsl(var(--accent-urban-gray))'
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
-				'gradient-cta': 'var(--gradient-cta)'
+				'gradient-cta': 'var(--gradient-cta)',
+				'gradient-hero': 'var(--gradient-hero)'
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',

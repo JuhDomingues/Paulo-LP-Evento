@@ -2,7 +2,7 @@ import { CheckCircle } from "lucide-react";
 
 export const ProblemSection = () => {
   return (
-    <section className="py-20 bg-background relative">
+    <section className="py-20 bg-secondary-bg relative">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           
@@ -10,15 +10,15 @@ export const ProblemSection = () => {
           <div className="text-center mb-16">
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div className="space-y-4">
-                <CheckCircle className="w-12 h-12 text-neon mx-auto" />
+                <CheckCircle className="w-12 h-12 text-highlight mx-auto" />
                 <h3 className="text-2xl font-bold text-foreground">Você já tem clientes.</h3>
               </div>
               <div className="space-y-4">
-                <CheckCircle className="w-12 h-12 text-neon mx-auto" />
+                <CheckCircle className="w-12 h-12 text-highlight mx-auto" />
                 <h3 className="text-2xl font-bold text-foreground">Já construiu resultados.</h3>
               </div>
               <div className="space-y-4">
-                <CheckCircle className="w-12 h-12 text-neon mx-auto" />
+                <CheckCircle className="w-12 h-12 text-highlight mx-auto" />
                 <h3 className="text-2xl font-bold text-foreground">Já conquistou espaço físico, carteira de clientes e respeito no seu mercado.</h3>
               </div>
             </div>
@@ -31,29 +31,29 @@ export const ProblemSection = () => {
             </h2>
             
             <div className="space-y-6">
-              <div className="flex items-start gap-4 p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                <div className="w-2 h-2 bg-destructive rounded-full mt-3 flex-shrink-0"></div>
+              <div className="flex items-start gap-4 p-4 bg-highlight/10 rounded-lg border border-highlight/20">
+                <div className="w-2 h-2 bg-highlight rounded-full mt-3 flex-shrink-0"></div>
                 <p className="text-lg text-muted-foreground">
                   Concorrentes menos preparados estão ocupando espaço porque se posicionam melhor.
                 </p>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                <div className="w-2 h-2 bg-destructive rounded-full mt-3 flex-shrink-0"></div>
+              <div className="flex items-start gap-4 p-4 bg-highlight/10 rounded-lg border border-highlight/20">
+                <div className="w-2 h-2 bg-highlight rounded-full mt-3 flex-shrink-0"></div>
                 <p className="text-lg text-muted-foreground">
                   A indicação sozinha não garante mais seu crescimento.
                 </p>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                <div className="w-2 h-2 bg-destructive rounded-full mt-3 flex-shrink-0"></div>
+              <div className="flex items-start gap-4 p-4 bg-highlight/10 rounded-lg border border-highlight/20">
+                <div className="w-2 h-2 bg-highlight rounded-full mt-3 flex-shrink-0"></div>
                 <p className="text-lg text-muted-foreground">
                   O digital se tornou a maior vitrine de validação profissional do mundo.
                 </p>
               </div>
               
-              <div className="flex items-start gap-4 p-4 bg-destructive/10 rounded-lg border border-destructive/20">
-                <div className="w-2 h-2 bg-destructive rounded-full mt-3 flex-shrink-0"></div>
+              <div className="flex items-start gap-4 p-4 bg-highlight/10 rounded-lg border border-highlight/20">
+                <div className="w-2 h-2 bg-highlight rounded-full mt-3 flex-shrink-0"></div>
                 <p className="text-lg text-muted-foreground">
                   E sem autoridade clara, até sua experiência pode ser ignorada.
                 </p>

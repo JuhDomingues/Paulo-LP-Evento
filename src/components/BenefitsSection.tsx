@@ -1,9 +1,9 @@
 import { CheckCircle, TestTube, Settings, Users, Sparkles } from "lucide-react";
-import networkingImage from "@/assets/networking.jpg";
+import pauloImage from "@/assets/paulo.jpg";
 
 export const BenefitsSection = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-secondary-bg">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           
@@ -18,7 +18,7 @@ export const BenefitsSection = () => {
             {/* Benefits list */}
             <div className="space-y-6">
               <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <TestTube className="w-8 h-8 text-neon flex-shrink-0 mt-1" />
+                <TestTube className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="text-xl font-bold text-foreground mb-2">Teste Exclusivo de Nível de Autoridade</h4>
                   <p className="text-muted-foreground">
@@ -38,7 +38,7 @@ export const BenefitsSection = () => {
               </div>
               
               <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <Users className="w-8 h-8 text-neon flex-shrink-0 mt-1" />
+                <Users className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
                 <div>
                   <h4 className="text-xl font-bold text-foreground mb-2">Networking Premium</h4>
                   <p className="text-muted-foreground">
@@ -62,8 +62,8 @@ export const BenefitsSection = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-glow">
                 <img 
-                  src={networkingImage} 
-                  alt="Networking e autoridade profissional" 
+                  src={pauloImage} 
+                  alt="Paulo Collet - Mentor de Autoridade" 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-primary/20"></div>
@@ -80,7 +80,7 @@ export const BenefitsSection = () => {
             <p className="text-xl text-muted-foreground mb-4">
               O mercado não premia só quem é bom.
             </p>
-            <p className="text-xl font-bold text-neon">
+            <p className="text-xl font-bold text-highlight">
               👉 Ele premia quem é mais visível, mais lembrado e mais reconhecido.
             </p>
           </div>

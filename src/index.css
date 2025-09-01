@@ -8,25 +8,25 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Preto Grafite Premium - #1A1A1A */
+    /* Preto Grafite - #1A1A1A */
     --background: 0 0% 10.2%;
     /* Branco Neve - #EDEDED */
     --foreground: 0 0% 92.9%;
 
-    /* Preto Grafite Premium para cards */
+    /* Preto Grafite para cards */
     --card: 0 0% 10.2%;
     --card-foreground: 0 0% 92.9%;
 
     --popover: 0 0% 10.2%;
     --popover-foreground: 0 0% 92.9%;
 
-    /* Dourado Metálico - #D4AF37 */
-    --primary: 45 62% 52%;
-    --primary-foreground: 0 0% 10.2%;
+    /* Azul Noturno Profundo - #0F1A2C (COR PRINCIPAL) */
+    --primary: 214 47% 12%;
+    --primary-foreground: 0 0% 92.9%;
 
-    /* Azul Noturno Profundo - #0F1A2C */
-    --secondary: 214 47% 12%;
-    --secondary-foreground: 0 0% 92.9%;
+    /* Dourado Metálico - #D4AF37 (COR SECUNDÁRIA) */
+    --secondary: 45 62% 52%;
+    --secondary-foreground: 0 0% 10.2%;
 
     --muted: 214 47% 12%;
     /* Cinza Urbano Claro - #A7A9AC */
@@ -35,29 +35,36 @@ All colors MUST be HSL.
     --accent: 45 62% 52%;
     --accent-foreground: 0 0% 10.2%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 92.9%;
+    --destructive: 45 62% 52%;
+    --destructive-foreground: 0 0% 10.2%;
 
     --border: 200 3% 20%;
     --input: 200 3% 20%;
     --ring: 45 62% 52%;
+    
+    /* Background alternation colors */
+    --background-primary: 0 0% 10.2%;  /* Preto Grafite */
+    --background-secondary: 214 47% 12%; /* Azul Noturno */
 
     --radius: 0.75rem;
 
     /* Custom design tokens com nova paleta */
-    --gradient-primary: linear-gradient(135deg, hsl(45 62% 52%) 0%, hsl(45 70% 45%) 50%, hsl(45 80% 38%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 10.2%) 0%, hsl(214 47% 12%) 50%, hsl(214 50% 8%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(214 47% 12%) 0%, hsl(214 50% 8%) 50%, hsl(214 55% 6%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(45 62% 52%) 0%, hsl(45 70% 45%) 50%, hsl(45 80% 38%) 100%);
     --gradient-cta: linear-gradient(135deg, hsl(45 62% 52%) 0%, hsl(45 70% 45%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 10.2%) 0%, hsl(214 47% 12%) 50%, hsl(0 0% 8%) 100%);
     
-    /* Dourado Metálico */
-    --accent-gold: 45 62% 52%;
-    /* Azul Noturno Profundo */
-    --accent-deep-blue: 214 47% 12%;
+    /* Azul Noturno Profundo - Cor Principal */
+    --accent-primary: 214 47% 12%;
+    /* Dourado Metálico - Cor de Destaque */
+    --accent-highlight: 45 62% 52%;
+    /* Preto Grafite - Background alternativo */
+    --accent-dark: 0 0% 10.2%;
     /* Cinza Urbano Claro */
     --accent-urban-gray: 200 3% 67%;
     
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
-    --shadow-gold: 0 0 20px hsl(var(--accent-gold) / 0.4);
+    --shadow-gold: 0 0 20px hsl(var(--accent-highlight) / 0.4);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;

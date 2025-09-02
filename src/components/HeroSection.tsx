@@ -126,7 +126,7 @@ export const HeroSection = () => {
               <div className="relative w-full aspect-[9/16]">
                 <iframe
                   ref={iframeRef}
-                  src={`https://www.youtube.com/embed/J8lrowpQ8MY?autoplay=${isMobile ? '0' : '1'}&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=J8lrowpQ8MY&playsinline=1`}
+                  src={`https://www.youtube.com/embed/J8lrowpQ8MY?autoplay=${isMobile ? '0' : '1'}&mute=${isMobile ? '0' : '1'}&controls=0&showinfo=0&rel=0&loop=1&playlist=J8lrowpQ8MY&playsinline=1`}
                   title="Posicionamento de Autoridade"
                   className="w-full h-full object-cover"
                   style={{ border: 'none' }}
@@ -134,8 +134,8 @@ export const HeroSection = () => {
                   allowFullScreen
                 ></iframe>
                 
-                {/* Unmute Button */}
-                {showUnmuteButton && (
+                {/* Unmute Button - Desktop only */}
+                {!isMobile && showUnmuteButton && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                     <div className="flex flex-col items-center gap-2">
                       <button
@@ -157,9 +157,9 @@ export const HeroSection = () => {
                     {/* Helper text for users */}
                     <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? (isMobile ? "Habilitando áudio..." : "Ativando som...") : 
+                        {isUnmuting ? "Ativando som..." : 
                          hasUserInteracted ? "Processando..." : 
-                         (isMobile ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
+                         "👆 Clique para ativar som"}
                       </p>
                     </div>
                   </div>
@@ -245,7 +245,7 @@ export const HeroSection = () => {
               <div className="relative w-full aspect-[9/16]">
                 <iframe
                   ref={iframeRef}
-                  src={`https://www.youtube.com/embed/J8lrowpQ8MY?autoplay=${isMobile ? '0' : '1'}&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=J8lrowpQ8MY&playsinline=1`}
+                  src={`https://www.youtube.com/embed/J8lrowpQ8MY?autoplay=${isMobile ? '0' : '1'}&mute=${isMobile ? '0' : '1'}&controls=0&showinfo=0&rel=0&loop=1&playlist=J8lrowpQ8MY&playsinline=1`}
                   title="Posicionamento de Autoridade"
                   className="w-full h-full object-cover"
                   style={{ border: 'none' }}
@@ -253,8 +253,8 @@ export const HeroSection = () => {
                   allowFullScreen
                 ></iframe>
                 
-                {/* Unmute Button */}
-                {showUnmuteButton && (
+                {/* Unmute Button - Desktop only */}
+                {!isMobile && showUnmuteButton && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                     <div className="flex flex-col items-center gap-2">
                       <button
@@ -276,9 +276,9 @@ export const HeroSection = () => {
                     {/* Helper text for users */}
                     <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? (isMobile ? "Habilitando áudio..." : "Ativando som...") : 
+                        {isUnmuting ? "Ativando som..." : 
                          hasUserInteracted ? "Processando..." : 
-                         (isMobile ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
+                         "👆 Clique para ativar som"}
                       </p>
                     </div>
                   </div>

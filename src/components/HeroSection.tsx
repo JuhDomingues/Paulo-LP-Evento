@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { VolumeX, Volume2, ExternalLink } from "lucide-react";
+import { VolumeX, Volume2 } from "lucide-react";
 import { useState, useRef } from "react";
 
 export const HeroSection = () => {
   const [showUnmuteButton, setShowUnmuteButton] = useState(true);
   const [isUnmuting, setIsUnmuting] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
-  const [showFallback, setShowFallback] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleUnmute = () => {
@@ -14,41 +13,51 @@ export const HeroSection = () => {
       setIsUnmuting(true);
       setHasUserInteracted(true);
       
-      // Check if it's a mobile device
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const videoId = 'J8lrowpQ8MY';
       
       if (isMobile) {
-        // For mobile, try iframe reload first, then show YouTube fallback quickly
-        const videoId = 'J8lrowpQ8MY';
-        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&playsinline=1&start=0&enablejsapi=1`;
+        // Mobile strategy: Reset video to beginning with audio enabled, but paused
+        // This forces user to click play again with audio permission
+        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&playsinline=1&enablejsapi=1&start=0&origin=${window.location.origin}`;
         
-        // Try iframe reload
-        iframeRef.current.src = newSrc;
+        // Force complete iframe replacement
+        const iframe = iframeRef.current;
+        const parent = iframe.parentNode;
         
-        // Show fallback quickly since mobile is unreliable
-        setTimeout(() => {
-          setIsUnmuting(false);
-          setShowFallback(true);
-        }, 1500);
+        // Create completely new iframe
+        const newIframe = document.createElement('iframe');
+        newIframe.src = newSrc;
+        newIframe.title = iframe.title;
+        newIframe.className = iframe.className;
+        newIframe.style.cssText = iframe.style.cssText;
+        newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        newIframe.allowFullscreen = true;
+        newIframe.setAttribute('playsinline', 'true');
         
-        // Hide unmute button after showing fallback
+        // Replace iframe completely
+        if (parent) {
+          parent.removeChild(iframe);
+          parent.appendChild(newIframe);
+          iframeRef.current = newIframe;
+        }
+        
+        // Hide unmute button immediately since video will be paused and user needs to click play
         setTimeout(() => {
           setShowUnmuteButton(false);
-        }, 6000);
-      } else {
-        // Desktop version - more reliable
-        const videoId = 'J8lrowpQ8MY';
-        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${videoId}&start=0`;
+          setIsUnmuting(false);
+        }, 1000);
         
-        // Force complete reload by removing and re-adding iframe
+      } else {
+        // Desktop version - can autoplay with audio after user interaction
+        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${videoId}&start=0&enablejsapi=1`;
+        
+        // Force complete reload for desktop
         const iframe = iframeRef.current;
         const parent = iframe.parentNode;
         const newIframe = iframe.cloneNode() as HTMLIFrameElement;
-        
-        // Update the new iframe with unmuted source
         newIframe.src = newSrc;
         
-        // Replace the old iframe
         if (parent) {
           parent.removeChild(iframe);
           parent.appendChild(newIframe);
@@ -61,15 +70,6 @@ export const HeroSection = () => {
         }, 2000);
       }
     }
-  };
-
-  const openYouTubeApp = () => {
-    // Fallback: Open directly in YouTube app/website
-    const videoUrl = 'https://youtu.be/J8lrowpQ8MY';
-    window.open(videoUrl, '_blank');
-    
-    // Hide the unmute button after opening YouTube
-    setShowUnmuteButton(false);
   };
 
   return (
@@ -123,27 +123,14 @@ export const HeroSection = () => {
                           <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
                         )}
                       </button>
-                      
-                      {/* YouTube fallback button for mobile */}
-                      {(hasUserInteracted && showFallback) && (
-                        <button
-                          onClick={openYouTubeApp}
-                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-xs rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center gap-1"
-                          title="Abrir no YouTube"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          YouTube
-                        </button>
-                      )}
                     </div>
                     
-                    {/* Helper text for mobile users */}
-                    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
+                    {/* Helper text for users */}
+                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Tentando ativar som..." : 
-                         showFallback ? "Clique no YouTube para ouvir" : 
+                        {isUnmuting ? (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "Habilitando áudio..." : "Ativando som...") : 
                          hasUserInteracted ? "Processando..." : 
-                         "👆 Clique para ativar som"}
+                         (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
                       </p>
                     </div>
                   </div>
@@ -244,27 +231,14 @@ export const HeroSection = () => {
                           <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
                         )}
                       </button>
-                      
-                      {/* YouTube fallback button for mobile */}
-                      {(hasUserInteracted && showFallback) && (
-                        <button
-                          onClick={openYouTubeApp}
-                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-xs rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center gap-1"
-                          title="Abrir no YouTube"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          YouTube
-                        </button>
-                      )}
                     </div>
                     
-                    {/* Helper text for mobile users */}
-                    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
+                    {/* Helper text for users */}
+                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Tentando ativar som..." : 
-                         showFallback ? "Clique no YouTube para ouvir" : 
+                        {isUnmuting ? (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "Habilitando áudio..." : "Ativando som...") : 
                          hasUserInteracted ? "Processando..." : 
-                         "👆 Clique para ativar som"}
+                         (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
                       </p>
                     </div>
                   </div>

@@ -1,5 +1,5 @@
 import { CheckCircle, TestTube, Settings, Users, Sparkles } from "lucide-react";
-import pauloImage from "@/assets/paulo.jpg";
+import pauloImage from "@/assets/Paulo.jpg";
 
 export const BenefitsSection = () => {
   return (

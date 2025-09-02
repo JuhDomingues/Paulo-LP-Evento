@@ -6,6 +6,7 @@ export const HeroSection = () => {
   const [showUnmuteButton, setShowUnmuteButton] = useState(true);
   const [isUnmuting, setIsUnmuting] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [showMobileInstructions, setShowMobileInstructions] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleUnmute = () => {
@@ -17,36 +18,62 @@ export const HeroSection = () => {
       const videoId = 'J8lrowpQ8MY';
       
       if (isMobile) {
-        // Mobile strategy: Reset video to beginning with audio enabled, but paused
-        // This forces user to click play again with audio permission
-        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&playsinline=1&enablejsapi=1&start=0&origin=${window.location.origin}`;
-        
-        // Force complete iframe replacement
+        // Mobile strategy: Force complete restart with blank iframe first, then load with audio
         const iframe = iframeRef.current;
         const parent = iframe.parentNode;
         
-        // Create completely new iframe
-        const newIframe = document.createElement('iframe');
-        newIframe.src = newSrc;
-        newIframe.title = iframe.title;
-        newIframe.className = iframe.className;
-        newIframe.style.cssText = iframe.style.cssText;
-        newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        newIframe.allowFullscreen = true;
-        newIframe.setAttribute('playsinline', 'true');
+        // Step 1: Completely clear iframe
+        iframe.src = 'about:blank';
         
-        // Replace iframe completely
-        if (parent) {
-          parent.removeChild(iframe);
-          parent.appendChild(newIframe);
-          iframeRef.current = newIframe;
-        }
+        // Step 2: Wait for clear, then create new iframe with audio enabled but paused
+        setTimeout(() => {
+          const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&playsinline=1&enablejsapi=1&start=0&origin=${window.location.origin}&cc_load_policy=0`;
+          
+          // Create completely new iframe element
+          const newIframe = document.createElement('iframe');
+          newIframe.src = newSrc;
+          newIframe.title = iframe.title;
+          newIframe.className = iframe.className;
+          newIframe.style.cssText = iframe.style.cssText;
+          newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          newIframe.allowFullscreen = true;
+          newIframe.setAttribute('playsinline', 'true');
+          newIframe.setAttribute('webkit-playsinline', 'true');
+          
+          // Force iframe replacement
+          if (parent) {
+            parent.removeChild(iframe);
+            parent.appendChild(newIframe);
+            iframeRef.current = newIframe;
+          }
+          
+          // After iframe loads, try to communicate with it
+          setTimeout(() => {
+            try {
+              if (newIframe.contentWindow) {
+                // Send commands to ensure video is ready with audio
+                newIframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+                newIframe.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*');
+                newIframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+              }
+            } catch (e) {
+              console.log('iframe communication failed:', e);
+            }
+          }, 1000);
+          
+        }, 200);
         
-        // Hide unmute button immediately since video will be paused and user needs to click play
+        // Show mobile instructions and hide unmute button
         setTimeout(() => {
           setShowUnmuteButton(false);
           setIsUnmuting(false);
-        }, 1000);
+          setShowMobileInstructions(true);
+        }, 2000);
+        
+        // Hide instructions after some time
+        setTimeout(() => {
+          setShowMobileInstructions(false);
+        }, 8000);
         
       } else {
         // Desktop version - can autoplay with audio after user interaction
@@ -132,6 +159,17 @@ export const HeroSection = () => {
                          hasUserInteracted ? "Processando..." : 
                          (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
                       </p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Mobile Instructions */}
+                {showMobileInstructions && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <div className="bg-black/80 text-white p-4 rounded-lg text-center max-w-xs">
+                      <div className="mb-2">🎵</div>
+                      <p className="text-sm font-semibold mb-1">Áudio habilitado!</p>
+                      <p className="text-xs">Agora clique no botão ▶️ do vídeo para ouvir com som</p>
                     </div>
                   </div>
                 )}
@@ -240,6 +278,17 @@ export const HeroSection = () => {
                          hasUserInteracted ? "Processando..." : 
                          (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "🎵 Clique para habilitar som" : "👆 Clique para ativar som")}
                       </p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Mobile Instructions */}
+                {showMobileInstructions && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <div className="bg-black/80 text-white p-4 rounded-lg text-center max-w-xs">
+                      <div className="mb-2">🎵</div>
+                      <p className="text-sm font-semibold mb-1">Áudio habilitado!</p>
+                      <p className="text-xs">Agora clique no botão ▶️ do vídeo para ouvir com som</p>
                     </div>
                   </div>
                 )}

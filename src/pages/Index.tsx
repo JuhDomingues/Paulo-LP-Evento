@@ -20,10 +20,10 @@ const Index = () => {
       <LearningSection />
       <BenefitsSection />
       <TargetSection />
-      <MentorSection />
-      <FAQSection />
       <PricingSection />
       <GuaranteeSection />
+      <MentorSection />
+      <FAQSection />
     </div>
   );
 };

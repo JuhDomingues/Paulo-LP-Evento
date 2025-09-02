@@ -106,7 +106,7 @@ export const FAQSection = () => {
                 Nossa equipe está pronta para ajudá-lo
               </p>
               <a
-                href="https://wa.me/5511999999999"
+                href="https://wa.me/5549999940242"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"

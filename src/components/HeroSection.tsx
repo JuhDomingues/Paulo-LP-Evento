@@ -1,25 +1,32 @@
 import { Button } from "@/components/ui/button";
-import { VolumeX, Volume2 } from "lucide-react";
+import { VolumeX, Volume2, ExternalLink } from "lucide-react";
 import { useState, useRef } from "react";
 
 export const HeroSection = () => {
   const [showUnmuteButton, setShowUnmuteButton] = useState(true);
   const [isUnmuting, setIsUnmuting] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleUnmute = () => {
     if (iframeRef.current) {
       setIsUnmuting(true);
+      setHasUserInteracted(true);
       
       // Check if it's a mobile device for optimized parameters
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
       const videoId = 'J8lrowpQ8MY';
       let newSrc: string;
       
-      if (isMobile) {
-        // Mobile optimized version with specific parameters for audio enablement
-        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}&widgetid=1`;
+      if (isIOS) {
+        // iOS specific - often requires opening in YouTube app for audio
+        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&playsinline=1&enablejsapi=1&origin=${window.location.origin}&fs=1`;
+      } else if (isMobile) {
+        // Android and other mobile devices
+        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}`;
       } else {
         // Desktop version
         newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`;
@@ -28,13 +35,34 @@ export const HeroSection = () => {
       // Replace the iframe source to enable audio
       iframeRef.current.src = newSrc;
       
-      // Hide the unmute button after appropriate delay
-      const delay = isMobile ? 3000 : 2000;
-      setTimeout(() => {
-        setShowUnmuteButton(false);
-        setIsUnmuting(false);
-      }, delay);
+      // For mobile, show YouTube link as fallback after trying embed
+      if (isMobile) {
+        setTimeout(() => {
+          setIsUnmuting(false);
+          setShowFallback(true);
+          // Keep unmute button visible for retry, but show fallback option
+        }, 3000);
+        
+        // Hide completely after more time if user doesn't need fallback
+        setTimeout(() => {
+          setShowUnmuteButton(false);
+        }, 8000);
+      } else {
+        setTimeout(() => {
+          setShowUnmuteButton(false);
+          setIsUnmuting(false);
+        }, 2000);
+      }
     }
+  };
+
+  const openYouTubeApp = () => {
+    // Fallback: Open directly in YouTube app/website
+    const videoUrl = 'https://youtu.be/J8lrowpQ8MY';
+    window.open(videoUrl, '_blank');
+    
+    // Hide the unmute button after opening YouTube
+    setShowUnmuteButton(false);
   };
 
   return (
@@ -73,25 +101,42 @@ export const HeroSection = () => {
                 {/* Unmute Button */}
                 {showUnmuteButton && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                    <button
-                      onClick={handleUnmute}
-                      className={`bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-lg ${
-                        isUnmuting ? 'cursor-not-allowed' : 'cursor-pointer'
-                      }`}
-                      title={isUnmuting ? "Ativando som..." : "Ativar som"}
-                      disabled={isUnmuting}
-                    >
-                      {isUnmuting ? (
-                        <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse text-green-400" />
-                      ) : (
-                        <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="flex flex-col items-center gap-2">
+                      <button
+                        onClick={handleUnmute}
+                        className={`bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-lg ${
+                          isUnmuting ? 'cursor-not-allowed' : 'cursor-pointer'
+                        }`}
+                        title={isUnmuting ? "Ativando som..." : "Ativar som"}
+                        disabled={isUnmuting}
+                      >
+                        {isUnmuting ? (
+                          <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse text-green-400" />
+                        ) : (
+                          <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+                        )}
+                      </button>
+                      
+                      {/* YouTube fallback button for mobile */}
+                      {(hasUserInteracted && showFallback) && (
+                        <button
+                          onClick={openYouTubeApp}
+                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-xs rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center gap-1"
+                          title="Abrir no YouTube"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          YouTube
+                        </button>
                       )}
-                    </button>
+                    </div>
                     
                     {/* Helper text for mobile users */}
-                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
+                    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Ativando som..." : "Toque para ouvir"}
+                        {isUnmuting ? "Ativando som..." : 
+                         showFallback ? "Sem áudio? Tente o YouTube" : 
+                         hasUserInteracted ? "Carregando..." : 
+                         "Toque para ouvir"}
                       </p>
                     </div>
                   </div>
@@ -177,25 +222,42 @@ export const HeroSection = () => {
                 {/* Unmute Button */}
                 {showUnmuteButton && (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                    <button
-                      onClick={handleUnmute}
-                      className={`bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-lg ${
-                        isUnmuting ? 'cursor-not-allowed' : 'cursor-pointer'
-                      }`}
-                      title={isUnmuting ? "Ativando som..." : "Ativar som"}
-                      disabled={isUnmuting}
-                    >
-                      {isUnmuting ? (
-                        <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse text-green-400" />
-                      ) : (
-                        <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="flex flex-col items-center gap-2">
+                      <button
+                        onClick={handleUnmute}
+                        className={`bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-lg ${
+                          isUnmuting ? 'cursor-not-allowed' : 'cursor-pointer'
+                        }`}
+                        title={isUnmuting ? "Ativando som..." : "Ativar som"}
+                        disabled={isUnmuting}
+                      >
+                        {isUnmuting ? (
+                          <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse text-green-400" />
+                        ) : (
+                          <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+                        )}
+                      </button>
+                      
+                      {/* YouTube fallback button for mobile */}
+                      {(hasUserInteracted && showFallback) && (
+                        <button
+                          onClick={openYouTubeApp}
+                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-xs rounded-full transition-all duration-300 hover:scale-105 shadow-lg flex items-center gap-1"
+                          title="Abrir no YouTube"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          YouTube
+                        </button>
                       )}
-                    </button>
+                    </div>
                     
                     {/* Helper text for mobile users */}
-                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-center">
+                    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Ativando som..." : "Toque para ouvir"}
+                        {isUnmuting ? "Ativando som..." : 
+                         showFallback ? "Sem áudio? Tente o YouTube" : 
+                         hasUserInteracted ? "Carregando..." : 
+                         "Toque para ouvir"}
                       </p>
                     </div>
                   </div>

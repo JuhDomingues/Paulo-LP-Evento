@@ -15,15 +15,15 @@ export const PricingSection = () => {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-16">
             
             {/* Ingresso Normal */}
-            <div className="bg-card rounded-2xl p-8 border border-border shadow-glow relative">
+            <div className="bg-card rounded-2xl p-6 sm:p-8 border border-border shadow-glow relative">
               <div className="text-center mb-6">
-                <Users className="w-12 h-12 text-highlight mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-foreground mb-2">🎟️ Ingresso Normal</h3>
+                <Users className="w-10 h-10 sm:w-12 sm:h-12 text-highlight mx-auto mb-4" />
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">🎟️ Ingresso Normal</h3>
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-4xl font-bold text-highlight">R$149</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-highlight">R$149</span>
                 </div>
                 <div className="bg-highlight/20 border border-highlight/40 rounded-lg px-4 py-2">
                   <p className="text-sm text-highlight font-semibold">
@@ -43,18 +43,18 @@ export const PricingSection = () => {
             </div>
 
             {/* Ingresso VIP */}
-            <div className="bg-gradient-primary/20 rounded-2xl p-8 border-2 border-highlight shadow-gold relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-highlight text-background px-4 py-2 rounded-full text-sm font-bold">
+            <div className="bg-gradient-primary/20 rounded-2xl p-6 sm:p-8 border-2 border-highlight shadow-gold relative">
+              <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-highlight text-background px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold">
                   MAIS POPULAR
                 </div>
               </div>
               
-              <div className="text-center mb-6">
-                <Crown className="w-12 h-12 text-highlight mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-foreground mb-2">🎟️ Ingresso VIP</h3>
+              <div className="text-center mb-6 mt-4 sm:mt-0">
+                <Crown className="w-10 h-10 sm:w-12 sm:h-12 text-highlight mx-auto mb-4" />
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">🎟️ Ingresso VIP</h3>
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-4xl font-bold text-highlight">R$199</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-highlight">R$199</span>
                 </div>
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">

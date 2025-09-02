@@ -7,51 +7,51 @@ export const BenefitsSection = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
               O que Você Vai Receber ao Garantir Sua Vaga:
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 sm:mb-20">
             
             {/* Benefits list */}
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <TestTube className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-card rounded-xl border border-border shadow-glow">
+                <TestTube className="w-6 h-6 sm:w-8 sm:h-8 text-highlight flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">Teste Exclusivo de Nível de Autoridade</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Teste Exclusivo de Nível de Autoridade</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     descubra em que estágio você está hoje e quais passos precisa dar para evoluir.
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <Settings className="w-8 h-8 text-cyan flex-shrink-0 mt-1" />
+              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-card rounded-xl border border-border shadow-glow">
+                <Settings className="w-6 h-6 sm:w-8 sm:h-8 text-cyan flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">Ferramenta de Diagnóstico</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Ferramenta de Diagnóstico</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Ferramenta prática de diagnóstico do seu posicionamento digital.
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <Users className="w-8 h-8 text-highlight flex-shrink-0 mt-1" />
+              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-card rounded-xl border border-border shadow-glow">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-highlight flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">Networking Premium</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Networking Premium</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Networking com outros profissionais de alto nível.
                   </p>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4 p-6 bg-card rounded-xl border border-border shadow-glow">
-                <Sparkles className="w-8 h-8 text-cyan flex-shrink-0 mt-1" />
+              <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-card rounded-xl border border-border shadow-glow">
+                <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-cyan flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">Participação Especial</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-2">Participação Especial</h4>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Jessica Collet, trazendo técnicas de imagem que aceleram o reconhecimento da sua autoridade.
                   </p>
                 </div>
@@ -73,14 +73,14 @@ export const BenefitsSection = () => {
           </div>
 
           {/* Call to action message */}
-          <div className="bg-gradient-primary/20 rounded-2xl p-8 border border-primary/30 text-center">
-            <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+          <div className="bg-gradient-primary/20 rounded-2xl p-6 sm:p-8 border border-primary/30 text-center">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4">
               Você pode ser excelente no que faz… mas se não for reconhecido como autoridade, será esquecido.
             </h3>
-            <p className="text-xl text-muted-foreground mb-4">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4">
               O mercado não premia só quem é bom.
             </p>
-            <p className="text-xl font-bold text-highlight">
+            <p className="text-lg sm:text-xl font-bold text-highlight">
               👉 Ele premia quem é mais visível, mais lembrado e mais reconhecido.
             </p>
           </div>

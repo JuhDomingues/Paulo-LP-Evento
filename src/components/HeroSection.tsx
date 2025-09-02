@@ -14,40 +14,47 @@ export const HeroSection = () => {
       setIsUnmuting(true);
       setHasUserInteracted(true);
       
-      // Check if it's a mobile device for optimized parameters
+      // Check if it's a mobile device
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
-      const videoId = 'J8lrowpQ8MY';
-      let newSrc: string;
-      
-      if (isIOS) {
-        // iOS specific - often requires opening in YouTube app for audio
-        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&playsinline=1&enablejsapi=1&origin=${window.location.origin}&fs=1`;
-      } else if (isMobile) {
-        // Android and other mobile devices
-        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}`;
-      } else {
-        // Desktop version
-        newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`;
-      }
-      
-      // Replace the iframe source to enable audio
-      iframeRef.current.src = newSrc;
-      
-      // For mobile, show YouTube link as fallback after trying embed
       if (isMobile) {
+        // For mobile, try iframe reload first, then show YouTube fallback quickly
+        const videoId = 'J8lrowpQ8MY';
+        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&playsinline=1&start=0&enablejsapi=1`;
+        
+        // Try iframe reload
+        iframeRef.current.src = newSrc;
+        
+        // Show fallback quickly since mobile is unreliable
         setTimeout(() => {
           setIsUnmuting(false);
           setShowFallback(true);
-          // Keep unmute button visible for retry, but show fallback option
-        }, 3000);
+        }, 1500);
         
-        // Hide completely after more time if user doesn't need fallback
+        // Hide unmute button after showing fallback
         setTimeout(() => {
           setShowUnmuteButton(false);
-        }, 8000);
+        }, 6000);
       } else {
+        // Desktop version - more reliable
+        const videoId = 'J8lrowpQ8MY';
+        const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&loop=1&playlist=${videoId}&start=0`;
+        
+        // Force complete reload by removing and re-adding iframe
+        const iframe = iframeRef.current;
+        const parent = iframe.parentNode;
+        const newIframe = iframe.cloneNode() as HTMLIFrameElement;
+        
+        // Update the new iframe with unmuted source
+        newIframe.src = newSrc;
+        
+        // Replace the old iframe
+        if (parent) {
+          parent.removeChild(iframe);
+          parent.appendChild(newIframe);
+          iframeRef.current = newIframe;
+        }
+        
         setTimeout(() => {
           setShowUnmuteButton(false);
           setIsUnmuting(false);
@@ -133,10 +140,10 @@ export const HeroSection = () => {
                     {/* Helper text for mobile users */}
                     <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Ativando som..." : 
-                         showFallback ? "Sem áudio? Tente o YouTube" : 
-                         hasUserInteracted ? "Carregando..." : 
-                         "Toque para ouvir"}
+                        {isUnmuting ? "Tentando ativar som..." : 
+                         showFallback ? "Clique no YouTube para ouvir" : 
+                         hasUserInteracted ? "Processando..." : 
+                         "👆 Clique para ativar som"}
                       </p>
                     </div>
                   </div>
@@ -254,10 +261,10 @@ export const HeroSection = () => {
                     {/* Helper text for mobile users */}
                     <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center">
                       <p className="text-xs sm:text-sm text-white bg-black/60 px-2 py-1 rounded whitespace-nowrap">
-                        {isUnmuting ? "Ativando som..." : 
-                         showFallback ? "Sem áudio? Tente o YouTube" : 
-                         hasUserInteracted ? "Carregando..." : 
-                         "Toque para ouvir"}
+                        {isUnmuting ? "Tentando ativar som..." : 
+                         showFallback ? "Clique no YouTube para ouvir" : 
+                         hasUserInteracted ? "Processando..." : 
+                         "👆 Clique para ativar som"}
                       </p>
                     </div>
                   </div>

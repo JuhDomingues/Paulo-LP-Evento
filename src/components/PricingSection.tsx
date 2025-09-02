@@ -80,15 +80,23 @@ export const PricingSection = () => {
             
           </div>
 
-          {/* Warning message */}
-          <div className="bg-highlight/20 border border-highlight/40 rounded-xl p-6 text-center mb-8">
-            <Clock className="w-8 h-8 text-highlight mx-auto mb-4" />
-            <p className="text-lg font-bold text-highlight mb-2">
-              ⚠️ Importante: os valores acima são exclusivos para as primeiras 30 vagas.
-            </p>
-            <p className="text-muted-foreground">
-              Após o preenchimento, os valores subirão automaticamente.
-            </p>
+          {/* Warning messages */}
+          <div className="space-y-4 mb-8">
+            <div className="bg-highlight/20 border border-highlight/40 rounded-xl p-6 text-center">
+              <Clock className="w-8 h-8 text-highlight mx-auto mb-4" />
+              <p className="text-lg font-bold text-highlight mb-2">
+                ⚠️ Importante: os valores acima são exclusivos para as primeiras 30 vagas.
+              </p>
+              <p className="text-muted-foreground">
+                Após o preenchimento, os valores subirão automaticamente.
+              </p>
+            </div>
+            
+            <div className="bg-accent-cyan/20 border border-accent-cyan/40 rounded-xl p-4 text-center">
+              <p className="text-base font-semibold text-accent-cyan">
+                Cada ingresso é INDIVIDUAL - não é permitido compartilhamento
+              </p>
+            </div>
           </div>
 
           <div className="text-center">

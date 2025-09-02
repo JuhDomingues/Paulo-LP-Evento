@@ -53,7 +53,7 @@ export const LearningSection = () => {
 
             <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 lg:p-10 border border-border/50 shadow-glow hover:shadow-gold transition-all duration-300 md:col-span-2 lg:col-span-3">
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-6">
-                <div className="w-24 h-32 sm:w-32 sm:h-40 rounded-2xl overflow-hidden flex-shrink-0">
+                <div className="w-40 h-52 sm:w-48 sm:h-64 rounded-2xl overflow-hidden flex-shrink-0">
                   <img 
                     src={JessicaImage} 
                     alt="Jessica Collet" 
